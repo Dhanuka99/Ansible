@@ -1,0 +1,20 @@
+#we can protect the ansible playbook using vaults
+
+#ENCRYPT
+
+ansible-vault encrypt abc.yml
+
+
+#EDIT
+
+ansible-vault edit abc.yml
+
+#DECRYPT
+
+ansible-vault decrypt abc.yml
+
+
+#when run the playbook create the artifact each playbook. it is JSON format. If have any password protected playbook no any useful. 
+
+playbook artifact anable false #not create the artifact when run the playbook
+vault-id @ prompt #ask the password from user
