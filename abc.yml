@@ -1,2 +1,13 @@
 ---
 - name: ABC playbook
+  hosts: dev
+  remote_user: devops
+  become: yes
+  tasks:
+    -name: adding a user
+     ansible.builtin.user:
+      name: tom
+      home: /home/atom
+      state: present
+
+
