@@ -1,0 +1,84 @@
+#define variables inside the playbook
+#vars
+---
+- name: ABC playbook
+  hosts: dev
+  vars:
+    myuser: tom
+    myhome: /home/atom
+  remote_user: devops
+  become: yes
+  tasks:
+    -name: adding a user
+     ansible.builtin.user:
+      name: "{{myuser}}"
+      home: "{{myhome}}"
+      state: present
+
+
+#define variables different yaml file
+#vars file
+#create user YML file inside the vars directory 
+user.yml
+
+myuser: senarath
+myhome: /home/senarath
+
+---
+- name: ABC playbook
+  hosts: dev
+  vars_files:
+    - vars/user.yml
+  remote_user: devops
+  become: yes
+  tasks:
+    -name: adding a user
+     ansible.builtin.user:
+      name: "{{myuser}}"
+      home: "{{myhome}}"
+      state: present
+
+#group vars 
+#Creating a folder with name group_vars define the variables inside the file which in created group. 
+
+
+mkdir group_vars
+vim group_vars/dev
+
+software: samba
+
+---
+- name: ABC playbook
+  hosts: dev
+  remote_user: devops
+  become: yes
+  tasks:
+    -name: adding a user
+     ansible.builtin.user:
+      name: "{{software}}"
+      state: present
+
+#Host vars
+
+mkdir host_vars
+vim host_vars/servera
+
+software: httpd
+
+---
+- name: ABC playbook
+  hosts: dev
+  remote_user: devops
+  become: yes
+  tasks:
+    -name: adding a user
+     ansible.builtin.user:
+      name: "{{software}}"
+      state: present
+
+#VARIABLE PRIORITY LEVEL
+
+vars > vars_file > host_vars > group_vars
+
+
+
