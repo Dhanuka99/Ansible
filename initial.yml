@@ -1,0 +1,44 @@
+#Initilize the project Directory
+mkdir /dep
+cd dep/
+
+vim inventory
+
+[dev]
+servera
+
+[prod]
+serverb
+serverc
+
+vim ansible.cfg
+
+[defaults]
+inventory = inventory
+remote_user = devops
+
+[privilage_escalation]
+become = yes
+become_method = sudo
+become_user = root
+become_ask_pass = false
+
+vim ~/.ansible-navigator.yml
+
+---
+ansible-navigator:
+ execution-enviroment:
+  image: utility.lab.example.com/ee-supported-rhel8.latest
+  pull:
+   policy: missing
+
+
+
+vim ~/.vimrc
+
+set ai
+set tabstop= 2
+set expandtab
+set cursorcolumn
+
+
